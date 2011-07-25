@@ -1,154 +1,72 @@
-# Html filter for Nette
+# Naira filter for Nette
 
 * _Author_: Mikuláš Dítě
 * _Copyright_: (c) Mikuláš Dítě 2011
 
-# Example
+# Save 28% of coding.
+# Get a 100% result!
 
-
-```haml
-!!! 5
-%html
-  %head
-    %meta [name => robots, content => {$robots}, n:ifset => $robots]
-    %title Haml Example
-    %script [type => text/javascript, src => {$basePath}/js/netteForms.js]
-
-  %body
-    %div [n:foreach => $flashes as $flash, class => flash {$flash->type}]
-      =$flash->message
-    .note
-      %ul
-        %li simple text
-        %li =time()
-        %li =$basePath
-    %article
-      {include #content}
-    \%h3 this is not a node, it's escaped
-
-    support for FormMacros:
-    {form registration}
-      =input name
-      =input submit
-    {/form}
-```
-
-converts to
+# Syntax
 
 ```html
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta name="robots" content="{$robots}" n:ifset="$robots">
-		<title>Haml Example</title>
-		<script type="text/javascript" src="{$basePath}/js/netteForms.js"></script></head>
+<header></>		<!-- Naira -->
+<header></header>	<!-- Output Html -->
 
-	<body>
-		<div n:foreach="$flashes as $flash" class="flash {$flash->type}">
-			{=$flash->message}</div>
-		<div class="note">
-			<ul>
-				<li>simple text</li>
-				<li>{=time()}</li>
-				<li>{=$basePath}</li></ul></div>
-		<article>
-			{include #content}</article>
-		%h3 this is not a node, it's escaped
+<#main></>
+<div id="main"></div>
 
-		support for FormMacros:
-		{form registration}
-		{input name}
-		{input submit}
-		{/form}</body></html>
+<.even></>
+<div class="even"></div>
+
+<footer#bottom.gray></>
+<footer id="bottom" class="gray"></div>
 ```
 
 # Requirements
 
-* Nette Version 2.0 Alpha 2 or newer - http://nette.org/
+* Nette Version 2.0 Beta or newer - http://nette.org/
 
 # Installation
 
-Easy as a pie. Just put these lines to your ```BasePresenter``` (and possibly ```BaseControl```)
+Piece of cake: just put these lines to your ```BasePresenter``` (and possibly ```BaseControl```)
 
 ```php
 public function templatePrepareFilters($template)
 {
-	$template->registerFilter(new Nette\Templating\Filters\Haml);
+	$template->registerFilter(new Nette\Templating\Filters\Naira);
 	$template->registerFilter(new Nette\Latte\Engine);
 }
 ```
 
-Just make sure Latte is not executed before Haml filter.
+Order does not matter. Naira should be compiled before Latte for minimal performance improvement upon first uncached request, yet the result should be the same.
 
 # Usage
 
-## Overview
-
-Indent by either spaces or tabs, but not both. Remember, with Haml you only write the opening tag. The whole markup looks like this:
-
-```haml
-%element_name#id.class1.class2[attr1 => unescaped, attr2 => "quoted, , ,"] Text might be here or on the next line
-```
-
-## Detailed
-
-Now, lets break it down. You may specify the element by omitting the %element_name, in which case it will default to div, which leaves you with the #id, .class, or both. At least one must be set however. Next comes the optional attributes in the brackets ```[attribute => value, another => "quoted, same"]```. No escaping is required but for commas - if you need them, quote the whole value. Textual values might be put on the end of the line as well as on the next.
-
-## Inline macros
-
-This feature allows you to omit braces around latte macros as long as you start the line with equation mark
-
-```haml
-%h1 = $title
-.div [n:foreach => $articles as $article]
-	%em = $article->label
-	%span = $article->published|date
-%footer
-	functions:
-	= date('Y')
-```
-
-goes for
+The default tag is ```div```.
 
 ```html
-<h1>{=$title}</h1>
-<div n:foreach="$articles as $article" class="div">
-	<em>{=$article->label}</em>
-	<span>{=$article->published|date}</span></div>
-<footer>
-	functions:
-	{=date('Y')}</footer>
+<.container></>
+<div class="container"></div>
+
+<article.container></>
+<article class="container"></article>
 ```
 
-## Indenting
+Multiple IDs are resolved as follows:
 
-The parser tries the very best to comprehend the indent and even some super crazy stuff such this is parsed correctly:
+```html
+<#used#ambiguous></>
+<div id="used"></div>
 
-```haml
-{foreach $products as $product}
-	%header = $product|helper
-		this text has level 1, as the line above
-			so does this one and the node below
-			%h2
-				this text finally has level 2
-				again the same
-			this is level 2
-				and this one as well, and that's ok
-{/foreach}
+<#used#ambiguous id="whatever"></>
+<div id="used"></div>
 ```
-Yet I believe you would rather put it down flat:
 
-```haml
-{foreach $products as $product}
-	%header = $product|helper
-	this text has level 1, as the line above
-	so does this one and the node below
-	%h2
-		this text finally has level 2
-		again the same
-	fine now
-	and this one as well, but that's ok
-{/foreach}
+Mixing standard html and Naira is allowed
+
+```html
+<.foo class="bar"></>
+<div class="foo bar"></div>
 ```
 
 # License - Original BSD
