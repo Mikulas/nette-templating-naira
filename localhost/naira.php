@@ -1,18 +1,15 @@
 <?php
 
-define("NAIRA_DIR", __DIR__ . '/..');
-
 require_once __DIR__ . '/nette.min.php';
-require_once NAIRA_DIR . '/Node.php';
-require_once NAIRA_DIR . '/Parser.php';
-require_once NAIRA_DIR . '/NairaFilter.php';
+require_once __DIR__ . '/../minified/naira.min.php';
 
 use \Nette\Utils\Strings as String;
 use \Nette\Templating\Filters\Naira;
 use \Nette\Templating\Filters\NairaException;
 
-if (($argv[1] == '--watch' && $argv[3] == '--out')
- || ($argv[3] == '--watch' && $argv[1] == '--out')) {
+if (isset($argv[1]) && isset($argv[2]) && isset($argv[3]) && isset($argv[4])
+ && (($argv[1] == '--watch' && $argv[3] == '--out')
+ ||  ($argv[3] == '--watch' && $argv[1] == '--out'))) {
 	if ($argv[1] == '--watch') {
 		$watch = $argv[2]; // todo strip trailing slashes
 		$out = $argv[4];
