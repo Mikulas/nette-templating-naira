@@ -1,0 +1,49 @@
+<.foo></>
+<.foo.bar></>
+<#foo></>
+<#foo#bar></>
+<#foo.bar></>
+<.foo#bar></>
+<#foo.bar.buz></>
+<.foo#bar.buz></>
+<.foo.bar#buz></>
+
+<.foo class="orig"></>
+<.foo.bar class="orig"></>
+<#foo id="orig"></>
+<#foo#bar id="orig"></>
+<#foo.bar id="orig" class="orig"></>
+<.foo#bar id="orig" class="orig"></>
+<#foo.bar.buz id="orig" class="orig"></>
+<.foo#bar.buz id="orig" class="orig"></>
+<.foo.bar#buz id="orig" class="orig"></>
+
+<.foo attr="value" class="orig"></>
+<.foo.bar attr="value" class="orig"></>
+<#foo attr="value" id="orig"></>
+<#foo#bar attr="value" id="orig"></>
+<#foo.bar attr="value" id="orig" class="orig"></>
+<.foo#bar attr="value" id="orig" class="orig"></>
+<#foo.bar.buz attr="value" id="orig" class="orig"></>
+<.foo#bar.buz attr="value" id="orig" class="orig"></>
+<.foo.bar#buz attr="value" id="orig" class="orig"></>
+
+<.foo class="orig" attr="value"></>
+<.foo.bar class="orig" attr="value"></>
+<#foo id="orig" attr="value"></>
+<#foo#bar id="orig" attr="value"></>
+<#foo.bar id="orig" class="orig" attr="value"></>
+<.foo#bar id="orig" class="orig" attr="value"></>
+<#foo.bar.buz id="orig" class="orig" attr="value"></>
+<.foo#bar.buz id="orig" class="orig" attr="value"></>
+<.foo.bar#buz id="orig" class="orig" attr="value"></>
+
+<.foo attr1="value" class="orig" attr="value"></>
+<.foo.bar attr1="value" class="orig" attr="value"></>
+<#foo attr1="value" id="orig" attr="value"></>
+<#foo#bar attr1="value" id="orig" attr="value"></>
+<#foo.bar attr1="value" id="orig" class="orig" attr="value"></>
+<.foo#bar attr1="value" id="orig" class="orig" attr="value"></>
+<#foo.bar.buz attr1="value" id="orig" class="orig" attr="value"></>
+<.foo#bar.buz attr1="value" id="orig" class="orig" attr="value"></>
+<.foo.bar#buz attr1="value" id="orig" class="orig" attr="value"></>

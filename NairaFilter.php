@@ -113,9 +113,14 @@ class Naira extends Object
 	 */
 	protected function processTag($tag)
 	{
-		$original_id = String::match($tag, '~id=["\']?(?P<id>.*)["\']?~im');
-		$tag = String::replace($tag, '~id=["\']?(?P<id>.*)["\']?~im');
-		$match = String::match($tag, '~^<(?P<tag>[a-z0-9]*)(?P<meta>[#a-z0-9_.-]*)(?P<attr1>[^>]*)(?:class=["\']?(?P<class>.*)["\']?)?(?P<attr2>[^>]*)>$~im');
+		$original_id = String::match($tag, '~id=(?:"([^"]*)"|\'([^\']*)\'|([^> \t\n]*))~im');
+		$original_class = String::match($tag, '~class=(?:"([^"]*)"|\'([^\']*)\'|([^> \t\n]*))~im');
+		$original_id = isset($original_id[1]) ? $original_id[1] : (isset($original_id[2]) ? $original_id[2] : $original_id[3]);
+		$original_class = isset($original_class[1]) ? $original_class[1] : (isset($original_class[2]) ? $original_class[2] : $original_class[3]);
+
+		$tag = String::replace($tag, '~(id|class)=("[^"]*"|\'[^\']*\'|[^> \t\n]*)?~im');
+
+		$match = String::match($tag, '~^<(?P<tag>[a-z0-9]*)(?P<meta>[#.a-z0-9_-]*)(?P<attr>[^>]*)>$~im'); // todo attr does not match value=">"
 		$classes = String::matchAll($match['meta'], '~\.[a-z0-9_-]+~im');
 		$id = String::match($match['meta'], '~#[a-z0-9_-]+~im');
 
@@ -125,14 +130,15 @@ class Naira extends Object
 		foreach ($classes as $class) {
 			$c[] = substr($class[0], 1);
 		}
-		if (trim($match['class']) !== '') {
-			$c[] = $match['class'];
+
+		if ($original_class !== NULL && trim($original_class) !== '') {
+			$c[] = $original_class;
 		}
 		$class = implode(' ', $c);
 
 		$id = $id ? substr($id[0], 1) : $original_id;
 
-		$attr = trim("$match[attr1] $match[attr2]");
+		$attr = String::replace(trim($match["attr"]), '~[ ]{2,}~', ' ');
 
 		$html = "<$tag" . ($id ? " id=\"$id\"" : '') . ($c ? " class=\"$class\"" : '') . ($attr ? " $attr" : '') . ">";
 		return $html;

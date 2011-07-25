@@ -1,0 +1,49 @@
+<div class="foo"></div>
+<div class="foo bar"></div>
+<div id="foo"></div>
+<div id="foo"></div>
+<div id="foo" class="bar"></div>
+<div id="bar" class="foo"></div>
+<div id="foo" class="bar buz"></div>
+<div id="bar" class="foo buz"></div>
+<div id="buz" class="foo bar"></div>
+
+<div class="foo orig"></div>
+<div class="foo bar orig"></div>
+<div id="foo"></div>
+<div id="foo"></div>
+<div id="foo" class="bar orig"></div>
+<div id="bar" class="foo orig"></div>
+<div id="foo" class="bar buz orig"></div>
+<div id="bar" class="foo buz orig"></div>
+<div id="buz" class="foo bar orig"></div>
+
+<div class="foo orig" attr="value"></div>
+<div class="foo bar orig" attr="value"></div>
+<div id="foo" attr="value"></div>
+<div id="foo" attr="value"></div>
+<div id="foo" class="bar orig" attr="value"></div>
+<div id="bar" class="foo orig" attr="value"></div>
+<div id="foo" class="bar buz orig" attr="value"></div>
+<div id="bar" class="foo buz orig" attr="value"></div>
+<div id="buz" class="foo bar orig" attr="value"></div>
+
+<div class="foo orig" attr="value"></div>
+<div class="foo bar orig" attr="value"></div>
+<div id="foo" attr="value"></div>
+<div id="foo" attr="value"></div>
+<div id="foo" class="bar orig" attr="value"></div>
+<div id="bar" class="foo orig" attr="value"></div>
+<div id="foo" class="bar buz orig" attr="value"></div>
+<div id="bar" class="foo buz orig" attr="value"></div>
+<div id="buz" class="foo bar orig" attr="value"></div>
+
+<div class="foo orig" attr1="value" attr="value"></div>
+<div class="foo bar orig" attr1="value" attr="value"></div>
+<div id="foo" attr1="value" attr="value"></div>
+<div id="foo" attr1="value" attr="value"></div>
+<div id="foo" class="bar orig" attr1="value" attr="value"></div>
+<div id="bar" class="foo orig" attr1="value" attr="value"></div>
+<div id="foo" class="bar buz orig" attr1="value" attr="value"></div>
+<div id="bar" class="foo buz orig" attr1="value" attr="value"></div>
+<div id="buz" class="foo bar orig" attr1="value" attr="value"></div>
