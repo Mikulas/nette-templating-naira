@@ -28,7 +28,8 @@ class Naira extends Object
 	/** @var array of string => regex snippet */
 	protected static $patterns = array(
 		'string' => '\'[^\'\n]*\'|"(?:\\\\.|[^"\\\\\n])*"',
-		'tag-inline' => '<(?:[!][a-z0-9]|img|hr|br|input|meta|area|embed|keygen|source|base|col|link|param|basefont|frame|isindex|wbr|command)(?:"[^"]*"|\'[^\']*\'|[^\'">])*>',
+		'comment' => '<(?:[!])(?:"[^"]*"|\'[^\']*\'|[^\'">])*>',
+		'tag-inline' => '<(?:img|hr|br|input|meta|area|embed|keygen|source|base|col|link|param|basefont|frame|isindex|wbr|command)(?:"[^"]*"|\'[^\']*\'|[^\'">])*>',
 		'tag-close' => '</(?:"[^"]*"|\'[^\']*\'|[^\'">])*>',
 		'tag-open' => '<(?:"[^"]*"|\'[^\']*\'|[^\'">])*>',
 		'indent' => '\n[\t ]*',
@@ -118,14 +119,15 @@ class Naira extends Object
 	 */
 	protected function processTag($tag)
 	{
-		$original_id = String::match($tag, '~id=(?:"([^"]*)"|\'([^\']*)\'|([^> \t\n]*))~im');
-		$original_class = String::match($tag, '~class=(?:"([^"]*)"|\'([^\']*)\'|([^> \t\n]*))~im');
+		$original_id = String::match($tag, '~id=(?:"([^"]*)"|\'([^\']*)\'|([^"\'> \t\n]*))~im');
+		$original_class = String::match($tag, '~class=(?:"([^"]*)"|\'([^\']*)\'|([^"\'> \t\n]*))~im');
 		$original_id = isset($original_id[1]) ? $original_id[1] : (isset($original_id[2]) ? $original_id[2] : $original_id[3]);
 		$original_class = isset($original_class[1]) ? $original_class[1] : (isset($original_class[2]) ? $original_class[2] : $original_class[3]);
 
-		$tag = String::replace($tag, '~(id|class)=("[^"]*"|\'[^\']*\'|[^> \t\n]*)?~im');
+		$tag = String::replace($tag, '~(id|class)=("[^"]*"|\'[^\']*\'|[^"\'> \t\n]*)?~im');
 
-		$match = String::match($tag, '~^<(?P<tag>[a-z0-9]*)(?P<meta>[#.a-z0-9_-]*)(?P<attr>[^>]*)>$~im'); // todo attr does not match value=">"
+		$match = String::match($tag, '~^<(?P<tag>[a-z0-9]*)(?P<meta>[#.a-z0-9_-]*)(?P<attr>("[^"]*"|\'[^\']\'|[^"\'>]*)*)>$~im');
+
 		$classes = String::matchAll($match['meta'], '~\.[a-z0-9_-]+~im');
 		$id = String::match($match['meta'], '~#[a-z0-9_-]+~im');
 
@@ -179,7 +181,7 @@ class NairaParser extends Parser
 	public function getCloseTag()
 	{
 		$tag = $this->tree[$this->level]->value;
-		$match = String::match($tag, '~^<(?P<name>[a-z0-9]+)(>|[ \t\n])~i');
+		$match = String::match($tag, '~<(?P<name>[a-z0-9]+)(>|[ \t\n])~i');
 		return '</' . $match['name'] . '>';
 	}
 

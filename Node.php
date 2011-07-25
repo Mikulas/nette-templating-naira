@@ -132,7 +132,7 @@ class Node extends Object implements \ArrayAccess
 			return $node[$offset - 1];
 		}
 
-		throw new \Exception('not found'); // todo improve
+		throw new \Nette\Templating\Filters\NairaException("Node not found.");
 	}
 
 }
