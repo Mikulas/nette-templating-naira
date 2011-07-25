@@ -124,6 +124,10 @@ class Node extends Object implements \ArrayAccess
 			return $this;
 		}
 
+		if ($this->children === NULL) {
+			throw new \Nette\Templating\Filters\NairaException("Unmatched closing tag.");
+		}
+
 		foreach (array_reverse($this->children) as $node) {
 			return $node[$offset - 1];
 		}

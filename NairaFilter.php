@@ -87,20 +87,25 @@ class Naira extends Object
 		$this->parser = new NairaParser();
 
 		foreach ($res as $node) {
-			switch ($node['type']) {
-				case 'tag-open':
-					$this->parser->add($this->processTag($node['value']));
-					$this->parser->up();
-					break;
+			try {
+				switch ($node['type']) {
+					case 'tag-open':
+						$this->parser->add($this->processTag($node['value']));
+						$this->parser->up();
+						break;
 
-				case 'tag-close':
-					$this->parser->add($this->parser->getCloseTag());
-					$this->parser->down();
-					break;
+					case 'tag-close':
+						$this->parser->add($this->parser->getCloseTag());
+						$this->parser->down();
+						break;
 
-				default:
-					$this->parser->add($node['value']);
-					break;
+					default:
+						$this->parser->add($node['value']);
+						break;
+				}
+			} catch (NairaException $e) {
+				$e->sourceLine = $node['line'];
+				throw $e;
 			}
 		}
 	}
