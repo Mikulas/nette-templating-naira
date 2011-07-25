@@ -75,12 +75,12 @@ Naira might be precompiled on localhost or used on production server.
 
 Localhost directory in the archive you downloaded holds a simple php script that compiles specified files or directories every time they are changed.
 
-```
+```bash
 php naira.php --watch src/input.html --output templates/index.html
-php naira.php --watch src/ -- output templates/
+php naira.php --watch src/ --output templates/
 ```
 
-The compiler itself is production ready. Even though it is designed for Nette Framework, it can easily be used in projects based on other frameworks.
+The compiler itself is production ready. Even though it is designed for Nette Framework, it can easily be used in projects based on other frameworks:
 
 ```php
 $naira = new \Nette\Templating\Filters\Naira();
