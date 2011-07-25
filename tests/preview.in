@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Example Filter Page</>
+	</>
+	<body>
+		<.container>
+			<#flash.span-24>
+				<.flash>message content</>
+			</>
+			<article.span-24>
+				{include #content}
+			</>
+			<.span-24>
+			</>
+		</>
+	</>
+</>
