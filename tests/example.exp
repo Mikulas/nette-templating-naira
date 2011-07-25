@@ -71,7 +71,7 @@
 			<h2>{block header}{/block}</h2>
 
 			<div class="flashes">
-				<div class="flash {$flash->type}"" n:foreach="$flashes as $flash">{$flash->message}</div>
+				<div class="flash {$flash->type}" n:foreach="$flashes as $flash">{$flash->message}</div>
 			</div>
 			<hr>
 
