@@ -12,7 +12,7 @@ use Nette\Utils\Html as Html;
 use Nette\Utils\Tokenizer;
 
 
-class Noname extends Object
+class Naira extends Object
 {
 
 	/** @var string */
@@ -46,7 +46,7 @@ class Noname extends Object
 
 	/**
 	 * @param string $template
-	 * @throws Nette\Latte\Filters\NonameException
+	 * @throws Nette\Latte\Filters\NairaException
 	 */
 	public function __invoke($template)
 	{
@@ -57,7 +57,7 @@ class Noname extends Object
 
 	/**
 	 * @param string $template
-	 * @throws Nette\Latte\Filters\NonameException
+	 * @throws Nette\Latte\Filters\NairaException
 	 * @return string filtered template
 	 */
 	public function parse($template)
@@ -75,7 +75,7 @@ class Noname extends Object
 
 
 	/**
-	 * @throws Nette\Latte\Filters\NonameException
+	 * @throws Nette\Latte\Filters\NairaException
 	 * @return array
 	 */
 	protected function buildTree()
@@ -83,7 +83,7 @@ class Noname extends Object
 		$t = new Tokenizer(self::$patterns, 'mi');
 		$res = $t->tokenize($this->template);
 
-		$this->parser = new NonameParser();
+		$this->parser = new NairaParser();
 
 		foreach ($res as $node) {
 			switch ($node['type']) {
@@ -244,7 +244,7 @@ class Parser extends Object implements \ArrayAccess
 
 
 
-class NonameParser extends Parser
+class NairaParser extends Parser
 {
 
 	public function getCloseTag()
@@ -382,4 +382,4 @@ class Node extends Object implements \ArrayAccess
 
 }
 
-class NonameException extends \Nette\Templating\FilterException {}
+class NairaException extends \Nette\Templating\FilterException {}

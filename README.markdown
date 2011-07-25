@@ -1,4 +1,4 @@
-# Haml filter for Nette
+# Html filter for Nette
 
 * _Author_: Mikuláš Dítě
 * _Copyright_: (c) Mikuláš Dítě 2011
