@@ -10,6 +10,7 @@ use Nette\Object;
 use Nette\Utils\Strings as String;
 use Nette\Utils\Html as Html;
 use Nette\Utils\Tokenizer;
+use Nette\Utils\Parser\Parser;
 
 
 class Naira extends Object

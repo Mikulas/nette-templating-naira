@@ -11,7 +11,7 @@ define('TEMP_DIR', WWW_DIR . '/../temp');
 
 use Nette\Diagnostics\Debugger;
 use Nette\Environment;
-use Nette\Templating\Filters\Noname;
+use Nette\Templating\Filters\Naira;
 
 require LIBS_DIR . '/Nette/loader.php';
 
@@ -41,8 +41,8 @@ while (FALSE !== ($file = readDir($handle))) {
 	echo "\n#####################\n\t$filename\n\n";
 	$in = __DIR__ . "/$filename.in";
 	$template = file_get_contents($in);
-	$haml = new Noname();
-	$output = $haml->parse($template);
+	$naira = new Naira();
+	$output = $naira->parse($template);
 	$out = __DIR__ . "/$filename.out";
 	file_put_contents($out, $output);
 	$expected = __DIR__ . "/$filename.exp";

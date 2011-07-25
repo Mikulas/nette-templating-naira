@@ -6,6 +6,8 @@
 
 namespace Nette\Utils\Parser;
 
+use Nette\Object;
+
 
 class Node extends Object implements \ArrayAccess
 {
