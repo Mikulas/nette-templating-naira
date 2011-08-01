@@ -1,4 +1,4 @@
-<?php //netteloader=Nette\Framework
+<?php
 
 
 /**
@@ -163,8 +163,8 @@ class Parser extends Object implements \ArrayAccess
 namespace Nette\Templating\Filters {
 
 use Nette\Object;
-use Nette\Utils\StringsasString;
-use Nette\Utils\HtmlasHtml;
+use Nette\Utils\Strings as String;
+use Nette\Utils\Html;
 use Nette\Utils\Tokenizer;
 use Nette\Utils\Parser\Parser;
 
