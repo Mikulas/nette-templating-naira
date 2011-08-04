@@ -45,7 +45,8 @@ class Node extends Object implements \ArrayAccess
 
 	public function add($value)
 	{
-		$this->addNode(new Node($value, & $this));
+		$node = new Node($value, $this);
+		$this->addNode($node);
 	}
 
 

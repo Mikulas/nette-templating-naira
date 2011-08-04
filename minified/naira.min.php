@@ -32,7 +32,8 @@ class Node extends Object implements \ArrayAccess
 
 	function add($value)
 	{
-		$this->addNode(new Node($value, & $this));
+		$node = new Node($value, $this);
+		$this->addNode($node);
 	}
 
 	function getLast()
@@ -164,7 +165,7 @@ namespace Nette\Templating\Filters {
 
 use Nette\Object;
 use Nette\Utils\Strings as String;
-use Nette\Utils\Html;
+use Nette\Utils\Html as Html;
 use Nette\Utils\Tokenizer;
 use Nette\Utils\Parser\Parser;
 
